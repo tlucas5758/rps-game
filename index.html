@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Rock, Paper, Scissors Game</title>
+  </head>
+  <body>
+
+    <h1>Rock Paper Scissors</h1>
+    
+    <!-- <h3 id="usr-selection">User Selection: ...Nothing</h3>
+    <h3 id="comp-selection">Computer Selection: ...Nothing</h3> -->
+
+    <h5 id="user-wins">Your Wins: 0</h5>
+    <h5 id="computer-wins">Computer Wins: 0</h5>
+    <h5 id="ties">Ties: 0</h5>
+
+    <script type="text/javascript">
+        // array of possible plays (r at index 0, p at index 1, s at index 2)
+        var playsArray = ['r', 'p', 's'];
+
+        // score variables
+        var playerScore = 0;
+        var computerScore = 0;
+        var tieGame = 0;
+
+        var userGuess;
+        var computerGuess;
+
+        // element variables
+        var elemPlayerScore = document.getElementById('user-wins');
+        var elemComputerScore = document.getElementById('computer-wins');
+        var elemTies = document.getElementById('ties');
+
+        // --------------------------------------------------
+        // execute welcomeMessage function
+        welcomeMessage();
+
+        // ---------------------------------------------------
+        document.onkeyup = function(event) {
+            // user selection
+            userGuess = event.key;
+            console.log(event.key);
+
+            // computer selection generated with Math.random function
+            computerGuess = getRandomSelection();
+
+            if (userGuess === computerGuess) {
+              console.log("user and computer tied");
+              // increase tieGame score
+              tieGame++;
+              elemTies.textContent = "Ties: " + tieGame;
+            } else if (userGuess === 'r') {
+                if (computerGuess === 's') {
+                  console.log("user wins");
+                  playerScore++;
+                  elemPlayerScore.textContent = "Your Wins: " + playerScore;
+                } else {
+                  // computer guess is paper
+                  console.log("computer wins");
+                  computerScore++;
+                  elemComputerScore.textContent = "Computer Wins: " + computerScore;
+                }
+            } else if (userGuess === 'p') {
+                if (computerGuess === 'r') {
+                  console.log("user wins");
+                  playerScore++;
+                  elemPlayerScore.textContent = "Your Wins: " + playerScore;
+                } else {
+                  // computer guess is scissors
+                  console.log("computer wins");
+                  computerScore++;
+                  elemComputerScore.textContent = "Computer Wins: " + computerScore;
+                } 
+            } else if (userGuess === 's') {
+                if (computerGuess === 'p') {
+                  console.log("user wins");
+                  playerScore++;
+                  elemPlayerScore.textContent = "Your Wins: " + playerScore;
+                } else {
+                  // computer guess is rock
+                  computerScore++;
+                  elemComputerScore.textContent = "Computer Wins: " + computerScore;
+                }
+            }
+        }
+
+        // ----------------------------------------------------
+        // generate random play for computer's move
+        function getRandomSelection() {
+          // 0, 1, 2 as possible values from Math random
+          var max = 3;
+          
+          // record play as member of playsArray at randomly generated index
+          var play = playsArray[Math.floor(Math.random() * Math.floor(max))];
+          
+          // return play (r, p, or s)
+          return play;
+        }
+
+        function welcomeMessage() {
+          alert("Welcome to the game of Rock Paper Scissors! Remember the rules are simple!\nRock Beats Scissors\nScissors Beats Paper\nPaper Beats Rock");
+        }
+
+    </script>
+  </body>
+</html>        
